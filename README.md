@@ -10,3 +10,11 @@ This repository contains the code implementation of Decoupled Graph Neural Archi
    ```bash
    python search-test.py
 
+
+2. **test the accuracy of optimal DGNN Architecture**
+
+   To test the accuracy of optimal DGNN Architecture:
+
+   ```bash
+   python run-test.py
+
