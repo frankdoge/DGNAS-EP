@@ -1,4 +1,12 @@
 # Decoupled Graph Neural Architecture Search with Explainable Variable Propagation Operation
 This repository contains the code implementation of Decoupled Graph Neural Architecture Search with Explainable Variable Propagation Operation submitted to Knowledge and Information Systems！
 
-Coming soon！
+## Running the Experiment
+
+1. **Searching the optimal DGNN Architecture**
+
+   To search for the optimal DGNN architecture, run the following command:
+
+   ```bash
+   python search-test.py
+
