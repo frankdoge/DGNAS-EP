@@ -318,55 +318,33 @@ def main(cycles, population_size, sample_size):
 # print("-----------round begin-----------")
 h = main(500, 20, 3)
 
-# acc = {}
-# d = {}
-# res = 0
-# for i in range(len(h)):
-#     hstr = l2s(h[i].arch)
-#     acc[hstr] = h[i].val_acc * 100
-# #根据val-acc将最优的十个结构进行选择
-# accs = dict(sorted(acc.items(), key= lambda x:x[0],reverse=True))
-# accs = dict_slice(accs,0,10)
-# #重复进行5轮实验来验证这十个结构哪个为最优
-# iteration=5
-# res =np.zeros(10)
-# for it in range(iteration):
-#     num = 0
-#     for sarch in accs.keys():
-#         arch = s2l(sarch)
-#         val_acc, test_acc, cnew_arch = train_and_eval_combine(args, arch, data, index)
-#         print("this arch:")
-#         print(cnew_arch)
-#         print("the val_acc is %f" %(val_acc))
-#         res[num] += val_acc
-#         num += 1
-# res = np.array([i/5 for i in res])
-# idx = np.argmax(res)
-#
-# #找到最优结构
-# best_arch = s2l(list((accs.keys()))[idx])
-# print("最优结构是:")
-# print(best_arch)
-#
-#
-# #进行10轮10次的重复训练获得最优的均值和方差
-# avg_list = []
-# var_list = []
-# for i in range(10):
-#     temp_val = np.zeros(100)
-#     for j in range(100):
-#         val_acc, test_acc, cnew_arch = train_and_eval_combine(args, best_arch, data, index)
-#         temp_val[j] = test_acc*100
-#     val = sorted(temp_val, reverse=True)
-#     val = val[:10]
-#     print("the %d iterations' test_acc is %f±%f" %(i, np.mean(temp_val), np.var(temp_val)))
-#     print("the %d iterations' priority test_acc is %f±%f" % (i, np.mean(val), np.var(val)))
-#     avg_list.append(np.mean(temp_val))
-#     var_list.append(np.var(temp_val))
-#
-# nlist = np.array(avg_list)
-# idx = np.argmax(nlist)
-#
-#
-# print("-------------------------------------------------")
-# print("the result is %f±%f" % (avg_list[idx], var_list[idx]))
+acc = {}
+d = {}
+res = 0
+for i in range(len(h)):
+    hstr = l2s(h[i].arch)
+    acc[hstr] = h[i].val_acc * 100
+#根据val-acc将最优的十个结构进行选择
+accs = dict(sorted(acc.items(), key= lambda x:x[0],reverse=True))
+accs = dict_slice(accs,0,10)
+#重复进行5轮实验来验证这十个结构哪个为最优
+iteration=5
+res =np.zeros(10)
+for it in range(iteration):
+    num = 0
+    for sarch in accs.keys():
+        arch = s2l(sarch)
+        val_acc, test_acc, cnew_arch = train_and_eval_combine(args, arch, data, index)
+        print("this arch:")
+        print(cnew_arch)
+        print("the val_acc is %f" %(val_acc))
+        res[num] += val_acc
+        num += 1
+res = np.array([i/5 for i in res])
+idx = np.argmax(res)
+
+#找到最优结构
+best_arch = s2l(list((accs.keys()))[idx])
+print("最优结构是:")
+print(best_arch)
+
