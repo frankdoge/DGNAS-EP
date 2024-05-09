@@ -295,21 +295,6 @@ def main(cycles, population_size, sample_size):
             print("the %d iteration's res{val_acc:%f   test_acc:%f}" % (
                 len(history) - population_size, child.val_acc, child.test_acc))
 
-        temp_val = sorted(history, key=lambda i: i.val_acc, reverse=True)
-        temp_val = temp_val[:5]
-        temp_val = [x.val_acc for x in temp_val]
-        temp_val = np.mean(temp_val)
-        temp_var = np.var(temp_val)
-        i = len(history)-len(population)
-        val_compare[i] = [temp_val,temp_var]
-
-    path = "./val-compare/"
-    if not os.path.exists(path):
-        os.mkdir(path)
-    name = 'DGNAS-PE-res-'+args.data+'.npy'
-    name = os.path.join(path,name)
-    np.save(name,val_compare)
-
     return history
 
 
@@ -334,7 +319,7 @@ for it in range(iteration):
     num = 0
     for sarch in accs.keys():
         arch = s2l(sarch)
-        val_acc, test_acc, cnew_arch = train_and_eval_combine(args, arch, data, index)
+        val_acc, test_acc, cnew_arch = train_and_eval_constrain(args, arch, data, index)
         print("this arch:")
         print(cnew_arch)
         print("the val_acc is %f" %(val_acc))
